@@ -16,9 +16,9 @@ var generateData = function (autorNames, commentMessage) {
       url: '',
       likes: '',
       comments: []
-    }
+    };
 
-    items[i].url =  'photos/' + (i + 1) + '.jpg';
+    items[i].url = 'photos/' + (i + 1) + '.jpg';
     items[i].likes = getRandom(15, 200);
 
     for (var j = 0; j < 3; j++) {
@@ -26,7 +26,7 @@ var generateData = function (autorNames, commentMessage) {
         avatar: 'img/avatar' + getRandom(1, 6) + '.svg',
         message: commentMessage[Math.floor(Math.random() * commentMessage.length)] + ' ' + commentMessage[Math.floor(Math.random() * commentMessage.length)],
         name: autorNames[Math.floor(Math.random() * autorNames.length)]
-      }
+      };
     }
   }
 
@@ -51,7 +51,7 @@ var photoList = document.querySelector('.pictures');
 var addPhoto = function (photos) {
   var fragment = document.createDocumentFragment();
 
-  for (var i = 0; i < photos.length; i ++) {
+  for (var i = 0; i < photos.length; i++) {
     var newElementPhoto = createPhoto(photos[i]);
     fragment.appendChild(newElementPhoto);
   }
