@@ -39,8 +39,25 @@ var templatePicure = document.querySelector('#picture').content.querySelector('.
 var createPhoto = function (object) {
   var newPhoto = templatePicure.cloneNode(true);
   newPhoto.querySelector('.picture__img').src = object.url;
-  newPhoto.querySelector('.picture__likes').src = object.likes;
-  newPhoto.querySelector('.picture__comments').src = object.comments;
+  newPhoto.querySelector('.picture__likes').textContent = object.likes;
+  newPhoto.querySelector('.picture__comments').textContent = object.comments.length;
 
   return newPhoto;
 };
+
+var photoList = document.querySelector('.pictures');
+
+// Функция добавления фотографий в разметку
+var addPhoto = function (photos) {
+  var fragment = document.createDocumentFragment();
+
+  for (var i = 0; i < photos.length; i ++) {
+    var newElementPhoto = createPhoto(photos[i]);
+    fragment.appendChild(newElementPhoto);
+  }
+
+  photoList.appendChild(fragment);
+};
+
+var randomPhotos = generateData(COMMENT_AUTOR, COMMENT_MESSAGE);
+addPhoto(randomPhotos);
