@@ -1,7 +1,7 @@
 # Проект «Кекстаграм» от [HTML Academy](https://htmlacademy.ru/)
 
-Вёрстка: [HTML Academy](https://htmlacademy.ru/)
-Скрипты на JS: [Александр Егоров](https://github.com/stigsanek)
+* Вёрстка: [HTML Academy](https://htmlacademy.ru/)
+* Скрипты на JS: [Александр Егоров](https://github.com/stigsanek)
 
 ---
 
