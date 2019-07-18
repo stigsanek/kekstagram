@@ -1,6 +1,6 @@
 'use strict';
 
-//Модуль страницы
+// Модуль страницы
 (function () {
   // Метод добавления элементов на страницу
   var photoListElement = document.querySelector('.pictures');
@@ -20,12 +20,11 @@
       });
       photoListElement.appendChild(fragmentElement);
     } else {
-      newNodeElement = render(data);
-      photoListElement.appendChild(newNodeElement);
+      render(data);
     }
   };
 
-  //Метод удаления элементов со страницы
+  // Метод удаления элементов со страницы
   var removeElement = function () {
     pageListElements.forEach(function (item) {
       item.remove();
