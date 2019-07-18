@@ -47,7 +47,7 @@
     likeElement.textContent = data.likes;
     commentElement.textContent = data.comments.length;
 
-    document.addEventListener('keydown', onbigPhotoEscPress);
+    document.addEventListener('keydown', onBigPhotoEscPress);
     closeElement.addEventListener('click', function () {
       closeBigPhoto();
     });
@@ -57,10 +57,10 @@
   var closeBigPhoto = function () {
     pictureElement.classList.add('hidden');
     bodyElement.classList.remove('modal-open');
-    document.removeEventListener('keydown', onbigPhotoEscPress);
+    document.removeEventListener('keydown', onBigPhotoEscPress);
   };
 
-  var onbigPhotoEscPress = function (evt) {
+  var onBigPhotoEscPress = function (evt) {
     pressEsc(evt, closeBigPhoto);
   };
 
