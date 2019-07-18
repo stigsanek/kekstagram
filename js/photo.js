@@ -14,21 +14,7 @@
     return newPhoto;
   };
 
-  var photoListElement = document.querySelector('.pictures');
-
-  // Метод добавления фотографий в разметку
-  var renderPhoto = function (photos) {
-    var fragment = document.createDocumentFragment();
-
-    photos.forEach(function (element) {
-      var newPhotoElement = createPhoto(element);
-      fragment.appendChild(newPhotoElement);
-    });
-
-    photoListElement.appendChild(fragment);
-  };
-
   window.photo = {
-    render: renderPhoto
+    create: createPhoto
   };
 })();

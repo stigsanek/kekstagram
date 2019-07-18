@@ -2,9 +2,9 @@
 
 //Гланый моудль
 (function () {
-  var error = function () {
-    console.log('ошибка');
+  var enablePage = function (responce) {
+    window.page.render(responce, window.photo.create);
   }
 
-  window.backend.download(window.photo.render, window.data.set, error);
+  window.backend.download(enablePage, window.data.set);
 })();
