@@ -6,5 +6,5 @@
     console.log('ошибка');
   }
 
-  window.backend.download(window.photo.render, error);
+  window.backend.download(window.photo.render, window.data.set, error);
 })();
