@@ -6,7 +6,7 @@
 
   // Функция создания фотографии
   var createPhoto = function (data) {
-    var newPhoto = templatePicure.cloneNode(true);
+    var newPhoto = templatePicureElement.cloneNode(true);
     newPhoto.querySelector('.picture__img').src = data.url;
     newPhoto.querySelector('.picture__likes').textContent = data.likes;
     newPhoto.querySelector('.picture__comments').textContent = data.comments.length;
@@ -21,11 +21,11 @@
     var fragment = document.createDocumentFragment();
 
     photos.forEach(function (element) {
-      var newPhototElement = createPhoto(element);
-      fragment.appendChild(newPhototElement);
+      var newPhotoElement = createPhoto(element);
+      fragment.appendChild(newPhotoElement);
     });
 
-    photoList.appendChild(fragment);
+    photoListElement.appendChild(fragment);
   };
 
   window.photo = {

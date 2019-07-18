@@ -13,7 +13,7 @@
   };
 
   window.data = {
-    set = setData,
-    get = getData
+    set: setData,
+    get: getData
   };
 })();
