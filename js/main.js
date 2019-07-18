@@ -2,12 +2,16 @@
 
 // Гланый моудль
 (function () {
-  // Функция отрисовки фотографий сразу после загрузки страницы
+  // Функция перехода страницы в активносе состояние
   var enablePage = function (responce) {
     window.page.render(responce, window.photo.create);
+    window.filter.enable();
   };
 
   // Передаем модулую фотографий метод отрисовки и метод закрытия по Esc
   window.photo.initiate(window.page.render, window.util.pressEsc);
-  window.backend.download(enablePage, window.data.set);
+
+  document.addEventListener('DOMContentLoaded', function () {
+    window.backend.download(enablePage, window.data.set);
+  });
 })();
