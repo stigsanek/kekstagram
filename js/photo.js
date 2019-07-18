@@ -1,4 +1,5 @@
 'use strict';
+var COMMENT_COUNT = 5;
 
 // Модуль создания фотографии
 (function () {
@@ -38,19 +39,41 @@
   var phototElement = pictureElement.querySelector('.big-picture__img').querySelector('img');
   var textElement = pictureElement.querySelector('.social__caption');
   var likeElement = pictureElement.querySelector('.likes-count');
-  var commentElement = pictureElement.querySelector('.comments-count');
+  var commentListElement = pictureElement.querySelector('.social__comments');
+  var commentItemElement = pictureElement.querySelector('.social__comment');
+  var commentCountElement = pictureElement.querySelector('.comments-count');
   var closeElement = pictureElement.querySelector('.big-picture__cancel');
 
   var createBigPhoto = function (data) {
     phototElement.src = data.url;
     textElement.textContent = data.description;
     likeElement.textContent = data.likes;
-    commentElement.textContent = data.comments.length;
+    commentCountElement.textContent = data.comments.length;
+
+    createComment(data);
 
     document.addEventListener('keydown', onBigPhotoEscPress);
     closeElement.addEventListener('click', function () {
       closeBigPhoto();
     });
+  };
+
+  // Функция загрузки комментариев
+  var createComment = function (data) {
+    pictureElement.querySelectorAll('.social__comment').forEach(function (element) {
+      element.remove();
+    });
+
+    var fragmentElement = document.createDocumentFragment();
+
+    data.comments.forEach(function (element) {
+      var newCommentElement = commentItemElement.cloneNode(true);
+      newCommentElement.querySelector('.social__picture').src = element.avatar;
+      newCommentElement.querySelector('.social__picture').alt = element.name;
+      newCommentElement.querySelector('.social__text').textContent = element.message;
+      fragmentElement.appendChild(newCommentElement);
+    });
+    commentListElement.appendChild(fragmentElement);
   };
 
   // Функции закрытия полноэкранной фотографии
