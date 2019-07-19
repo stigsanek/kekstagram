@@ -10,15 +10,13 @@
     POST: 'https://js.dump.academy/kekstagram'
   };
 
-  // Метод получения данных
-  var toRequest = function (onSuccess, onSuccessData, onError) {
+  var toRequest = function (onSuccess, onError) {
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
 
     xhr.addEventListener('load', function () {
       if (xhr.status === CODE_SUCCESS) {
         onSuccess(xhr.response);
-        onSuccessData(xhr.response);
       } else {
         onError('Cтатус ответа: ' + xhr.status + ' ' + xhr.statusText);
       }
