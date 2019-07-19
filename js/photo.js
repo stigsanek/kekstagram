@@ -88,7 +88,7 @@ var COMMENT_COUNT = 5;
         commentListElement.appendChild(fragmentElement);
         commentContainerElement.innerHTML = data.comments.length + ' из <span class="comments-count">' + data.comments.length + '</span> комментариев';
         listComments = [];
-        commentLoaderElement.classList.add('visually-hidden');
+        commentLoaderElement.classList.add('hidden');
       } else {
         for (var i = 0; i < COMMENT_COUNT; i ++) {
           fragmentElement.appendChild(listComments[i]);
@@ -106,7 +106,7 @@ var COMMENT_COUNT = 5;
         for (var i = 0; i < COMMENT_COUNT; i ++) {
           listComments.shift();
         }
-        commentLoaderElement.classList.remove('visually-hidden');
+        commentLoaderElement.classList.remove('hidden');
       }
     };
 
