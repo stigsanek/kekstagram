@@ -59,13 +59,16 @@ var COMMENT_COUNT = 5;
     });
   };
 
-  // Функция загрузки комментариев
+  // Функция создания комментариев
   var createComment = function (data) {
     pictureElement.querySelectorAll('.social__comment').forEach(function (element) {
       element.remove();
     });
 
+    // Массив комментариев
     var listComments = [];
+    // Счетчик количества комментариев
+    var count = 0;
     var fragmentElement = document.createDocumentFragment();
 
     data.comments.forEach(function (element) {
@@ -76,7 +79,8 @@ var COMMENT_COUNT = 5;
       listComments.push(newCommentElement);
     });
 
-    var showComment = function () {
+    // Функция рендеринга комментариев
+    var renderComment = function () {
       if (listComments.length <= COMMENT_COUNT) {
         listComments.forEach(function (element) {
           fragmentElement.appendChild(element);
@@ -89,8 +93,16 @@ var COMMENT_COUNT = 5;
         for (var i = 0; i < COMMENT_COUNT; i ++) {
           fragmentElement.appendChild(listComments[i]);
         }
-        commentContainerElement.innerHTML = COMMENT_COUNT + ' из <span class="comments-count">' + data.comments.length + '</span> комментариев';
+        // Проверка количества показанных комментариев и корректировка счетчика
+        if (data.comments.length - count > COMMENT_COUNT) {
+          commentContainerElement.innerHTML = count + COMMENT_COUNT + ' из <span class="comments-count">' + data.comments.length + '</span> комментариев';
+          count += COMMENT_COUNT;
+        } else {
+          count += data.comments.length - count;
+          commentContainerElement.innerHTML = count + ' из <span class="comments-count">' + data.comments.length + '</span> комментариев';
+        }
         commentListElement.appendChild(fragmentElement);
+        // Удаление из массива отрисованных комментариев
         for (var i = 0; i < COMMENT_COUNT; i ++) {
           listComments.shift();
         }
@@ -98,9 +110,9 @@ var COMMENT_COUNT = 5;
       }
     };
 
-    showComment();
+    renderComment();
     commentLoaderElement.addEventListener('click', function () {
-      showComment();
+      renderComment();
     });
   };
 
