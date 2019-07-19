@@ -26,7 +26,6 @@ var COMMENT_COUNT = 5;
       pictureElement.classList.remove('hidden');
       bodyElement.classList.add('modal-open');
       insertBigPhoto(data, createBigPhoto);
-      newPhoto.removeEventListener('click', onPhotoClick);
     };
 
     newPhoto.addEventListener('click', onPhotoClick);
@@ -42,7 +41,9 @@ var COMMENT_COUNT = 5;
   var commentListElement = pictureElement.querySelector('.social__comments');
   var commentItemElement = pictureElement.querySelector('.social__comment');
   var commentCountElement = pictureElement.querySelector('.comments-count');
+  var commentContainerElement = pictureElement.querySelector('.social__comment-count');
   var closeElement = pictureElement.querySelector('.big-picture__cancel');
+  var commentLoaderElement = pictureElement.querySelector('.social__comments-loader');
 
   var createBigPhoto = function (data) {
     phototElement.src = data.url;
@@ -64,6 +65,7 @@ var COMMENT_COUNT = 5;
       element.remove();
     });
 
+    var listComments = [];
     var fragmentElement = document.createDocumentFragment();
 
     data.comments.forEach(function (element) {
@@ -71,9 +73,35 @@ var COMMENT_COUNT = 5;
       newCommentElement.querySelector('.social__picture').src = element.avatar;
       newCommentElement.querySelector('.social__picture').alt = element.name;
       newCommentElement.querySelector('.social__text').textContent = element.message;
-      fragmentElement.appendChild(newCommentElement);
+      listComments.push(newCommentElement);
     });
-    commentListElement.appendChild(fragmentElement);
+
+    var showComment = function () {
+      if (listComments.length <= COMMENT_COUNT) {
+        listComments.forEach(function (element) {
+          fragmentElement.appendChild(element);
+        });
+        commentListElement.appendChild(fragmentElement);
+        commentContainerElement.innerHTML = data.comments.length + ' из <span class="comments-count">' + data.comments.length + '</span> комментариев';
+        listComments = [];
+        commentLoaderElement.classList.add('visually-hidden');
+      } else {
+        for (var i = 0; i < COMMENT_COUNT; i ++) {
+          fragmentElement.appendChild(listComments[i]);
+        }
+        commentContainerElement.innerHTML = COMMENT_COUNT + ' из <span class="comments-count">' + data.comments.length + '</span> комментариев';
+        commentListElement.appendChild(fragmentElement);
+        for (var i = 0; i < COMMENT_COUNT; i ++) {
+          listComments.shift();
+        }
+        commentLoaderElement.classList.remove('visually-hidden');
+      }
+    };
+
+    showComment();
+    commentLoaderElement.addEventListener('click', function () {
+      showComment();
+    });
   };
 
   // Функции закрытия полноэкранной фотографии
