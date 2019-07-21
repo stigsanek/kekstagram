@@ -20,10 +20,10 @@
   var removeElement = null;
   var setRemoveMethod = function (removeMethod) {
     removeElement = removeMethod;
-  }
+  };
 
   // Метод фильтрации элементов
-  var getFilterData = function(data, insertMethod, insertElement, doDebounce) {
+  var getFilterData = function (data, insertMethod, insertElement, doDebounce) {
     var initialData = data.slice();
     var filterData = null;
     var currentFilter = null;

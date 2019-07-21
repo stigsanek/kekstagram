@@ -90,7 +90,7 @@ var COMMENT_COUNT = 5;
         listComments = [];
         commentLoaderElement.classList.add('hidden');
       } else {
-        for (var i = 0; i < COMMENT_COUNT; i ++) {
+        for (var i = 0; i < COMMENT_COUNT; i++) {
           fragmentElement.appendChild(listComments[i]);
         }
         // Проверка количества показанных комментариев и корректировка счетчика
@@ -103,7 +103,7 @@ var COMMENT_COUNT = 5;
         }
         commentListElement.appendChild(fragmentElement);
         // Удаление из массива отрисованных комментариев
-        for (var i = 0; i < COMMENT_COUNT; i ++) {
+        for (i = 0; i < COMMENT_COUNT; i++) {
           listComments.shift();
         }
         commentLoaderElement.classList.remove('hidden');
