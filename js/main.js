@@ -22,7 +22,7 @@
 
     window.form.activate(function () {
       window.form.enable();
-      window.slider.enable(window.slider.getCoord);
+      window.slider.enable(console.log);
     });
   });
 })();

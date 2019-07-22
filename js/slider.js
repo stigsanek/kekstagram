@@ -3,7 +3,6 @@
 // Модуль управления слайдером
 (function () {
   var SLIDER_SIZE = 20;
-  var SLIDER_BORDER = 1;
 
   var sliderLineElement = document.querySelector('.effect-level__line');
   var sliderElement = sliderLineElement.querySelector('.effect-level__pin');
@@ -31,8 +30,8 @@
         var displacementX = sliderElement.offsetLeft - shift.x;
         if (displacementX >= sliderLineElement.offsetLeft - SLIDER_SIZE && displacementX <= sliderLineElement.offsetLeft + sliderLineElement.offsetWidth - SLIDER_SIZE) {
           sliderElement.style.left = displacementX + 'px';
+          callback(displacementX);
         }
-        callback();
       };
 
       var onMouseUp = function (upEvt) {
@@ -58,17 +57,8 @@
     sliderElement.removeEventListener('mousedown', onSliderMouseDown);
   };
 
-  // Метод определения координат слайдера
-  var getCoordinateSlider = function () {
-    var sliderCoordinate = sliderElement.getBoundingClientRect();
-    var sliderLineCoordinate = sliderLineElement.getBoundingClientRect();
-    var coordX = sliderCoordinate.left - sliderLineCoordinate.left + (SLIDER_SIZE / 2 - SLIDER_BORDER);
-    return coordX;
-  };
-
   window.slider = {
     enable: performCallback,
-    getCoord: getCoordinateSlider,
     remove: removeHandler
   };
 })();
