@@ -12,8 +12,8 @@
 
   // Передаем модулую фотографий метод отрисовки и метод закрытия по Esc
   window.photo.initiate(window.page.render, window.util.pressEsc);
-   // Передаем модулую формы метод закрытия по Esc
-   window.form.initiate(window.util.pressEsc, window.slider.remove);
+   // Передаем модулую формы метод закрытия по Esc, метод удаления обработчика слайдера и метод сброса положения слайдера
+   window.form.initiate(window.util.pressEsc, window.slider.remove, window.slider.reset);
   // Передаем модулю фильтров метод удаления элементов со страницы
   window.filter.initiate(window.page.clear);
 
@@ -22,7 +22,7 @@
 
     window.form.activate(function () {
       window.form.enable();
-      window.slider.enable(console.log);
+      window.slider.enable(window.form.applyEffect);
     });
   });
 })();

@@ -3,6 +3,8 @@
 // Модуль управления слайдером
 (function () {
   var SLIDER_SIZE = 20;
+  var SLIDER_LINE = 100;
+  var DEFAULT_POSITION = 453;
 
   var sliderLineElement = document.querySelector('.effect-level__line');
   var sliderElement = sliderLineElement.querySelector('.effect-level__pin');
@@ -30,7 +32,7 @@
         var displacementX = sliderElement.offsetLeft - shift.x;
         if (displacementX >= sliderLineElement.offsetLeft - SLIDER_SIZE && displacementX <= sliderLineElement.offsetLeft + sliderLineElement.offsetWidth - SLIDER_SIZE) {
           sliderElement.style.left = displacementX + 'px';
-          callback(displacementX);
+          callback(Math.floor(displacementX * SLIDER_LINE / sliderLineElement.offsetWidth));
         }
       };
 
@@ -52,6 +54,11 @@
     sliderElement.addEventListener('mousedown', onSliderMouseDown);
   };
 
+  // Метод сброса положения слайдера
+  var resetSlider = function () {
+    sliderElement.style.left = DEFAULT_POSITION + 'px';
+  };
+
   // Метод удаления обработчика слайдера
   var removeHandler = function () {
     sliderElement.removeEventListener('mousedown', onSliderMouseDown);
@@ -59,6 +66,7 @@
 
   window.slider = {
     enable: performCallback,
-    remove: removeHandler
+    remove: removeHandler,
+    reset: resetSlider
   };
 })();
