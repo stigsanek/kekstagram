@@ -13,15 +13,16 @@
   // Передаем модулую фотографий метод отрисовки и метод закрытия по Esc
   window.photo.initiate(window.page.render, window.util.pressEsc);
    // Передаем модулую формы метод закрытия по Esc
-   window.form.initiate(window.util.pressEsc);
+   window.form.initiate(window.util.pressEsc, window.slider.remove);
   // Передаем модулю фильтров метод удаления элементов со страницы
   window.filter.initiate(window.page.clear);
 
   document.addEventListener('DOMContentLoaded', function () {
     window.backend.download(enablePage);
 
-    window.slider.initiate(function () {
-      window.slider.getCoord();
+    window.form.activate(function () {
+      window.form.enable();
+      window.slider.enable(window.slider.getCoord);
     });
   });
 })();

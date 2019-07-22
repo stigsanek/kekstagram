@@ -25,8 +25,10 @@
 
   // Получение метода закрытия формы по Esc
   var pressEsc = null;
-  var setFormMethod = function (utilMethod) {
+  var removeSlider = null;
+  var setFormMethod = function (utilMethod, sliderMethod) {
     pressEsc = utilMethod;
+    removeSlider = sliderMethod;
   };
 
   // Обработчики закрытия формы редактирования изображения
@@ -42,29 +44,35 @@
   };
 
   // Обработчик загрузки изображения
-  var onFileChoserChange = function () {
-    var file = fileChoserElement.files[0];
-    var fileName = file.name.toLowerCase();
+  var onFileChoserChange = function (callback) {
+    return function () {
+      var file = fileChoserElement.files[0];
+      var fileName = file.name.toLowerCase();
 
-    var matches = FILE_TYPE.some(function (it) {
-      return fileName.endsWith(it);
-    });
-
-    if (matches) {
-      var reader = new FileReader();
-      reader.addEventListener('load', function () {
-        previewElement.src = reader.result;
+      var matches = FILE_TYPE.some(function (it) {
+        return fileName.endsWith(it);
       });
 
-      reader.readAsDataURL(file);
-      formContainerElement.classList.remove('hidden');
-      closeFormElement.addEventListener('click', onCloseFormElementClick);
-      document.addEventListener('keydown', onFormElementEscPress);
-      enableForm();
-    }
+      if (matches) {
+        var reader = new FileReader();
+        reader.addEventListener('load', function () {
+          previewElement.src = reader.result;
+        });
+
+        reader.readAsDataURL(file);
+        formContainerElement.classList.remove('hidden');
+        closeFormElement.addEventListener('click', onCloseFormElementClick);
+        document.addEventListener('keydown', onFormElementEscPress);
+        callback();
+      }
+    };
   };
 
-  fileChoserElement.addEventListener('change', onFileChoserChange);
+  // Метод выполнения callback при перемещении слайдера
+  var activateForm = function (callback) {
+    var onFormChange = onFileChoserChange(callback);
+    fileChoserElement.addEventListener('change', onFormChange);
+  };
 
   // Обработчики изменения масштаба изображения
   var inputScaleElement = formElement.querySelector('.scale__control--value');
@@ -115,9 +123,12 @@
     smallBtnElement.removeEventListener('click', onSmallBtnElementClick);
     bigBtnElement.removeEventListener('click', onBigBtnElementClick);
     effectsListElement.removeEventListener('click', onEffectsListElementClick);
+    removeSlider();
   };
 
   window.form = {
+    activate: activateForm,
+    enable: enableForm,
     initiate: setFormMethod
   }
 })();

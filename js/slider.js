@@ -47,9 +47,15 @@
   };
 
   // Метод выполнения callback при перемещении слайдера
+  var onSliderMouseDown = null;
   var performCallback = function (callback) {
-    var onSliderMouseDown = onSliderElementMove(callback);
+    onSliderMouseDown = onSliderElementMove(callback);
     sliderElement.addEventListener('mousedown', onSliderMouseDown);
+  };
+
+  // Метод удаления обработчика слайдера
+  var removeHandler = function () {
+    sliderElement.removeEventListener('mousedown', onSliderMouseDown);
   };
 
   // Метод определения координат слайдера
@@ -61,7 +67,8 @@
   };
 
   window.slider = {
-    initiate: performCallback,
-    getCoord: getCoordinateSlider
+    enable: performCallback,
+    getCoord: getCoordinateSlider,
+    remove: removeHandler
   };
 })();
