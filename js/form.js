@@ -31,11 +31,11 @@
   var setFormMethod = function (utilMethod, removeMethod, resetMethod) {
     pressEsc = utilMethod;
     removeSlider = removeMethod;
-    resetSlider = resetMethod
+    resetSlider = resetMethod;
   };
 
   // Обработчики закрытия формы редактирования изображения
-  var onCloseFormElementClick = function() {
+  var onCloseFormElementClick = function () {
     formContainerElement.classList.add('hidden');
     closeFormElement.removeEventListener('click', onCloseFormElementClick);
     document.removeEventListener('keydown', onFormElementEscPress);
@@ -88,7 +88,7 @@
     if (countScale > Scale.MIN) {
       countScale -= Scale.STEP;
       inputScaleElement.value = countScale + '%';
-      previewElement.style = 'transform: scale(' + countScale/Scale.MAX + ');';
+      previewElement.style = 'transform: scale(' + countScale / Scale.MAX + ');';
     }
   };
 
@@ -96,7 +96,7 @@
     if (countScale < Scale.MAX && countScale >= Scale.MIN) {
       countScale += Scale.STEP;
       inputScaleElement.value = countScale + '%';
-      previewElement.style = 'transform: scale(' + countScale/Scale.MAX + ');';
+      previewElement.style = 'transform: scale(' + countScale / Scale.MAX + ');';
     }
   };
 
@@ -142,7 +142,7 @@
       case 'heat':
         previewElement.style = 'filter: brightness(' + positionValue * 3 / 100 + ');';
         break;
-    };
+    }
   };
 
   // Функция перевода формы в активное состояние
@@ -167,5 +167,5 @@
     applyEffect: changeEffectLevel,
     enable: enableForm,
     initiate: setFormMethod
-  }
+  };
 })();
