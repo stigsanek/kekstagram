@@ -54,9 +54,7 @@ var COMMENT_COUNT = 5;
     createComment(data);
 
     document.addEventListener('keydown', onBigPhotoEscPress);
-    closeElement.addEventListener('click', function () {
-      closeBigPhoto();
-    });
+    closeElement.addEventListener('click', onBigPhotoClose);
   };
 
   // Функция создания комментариев
@@ -116,15 +114,15 @@ var COMMENT_COUNT = 5;
     });
   };
 
-  // Функции закрытия полноэкранной фотографии
-  var closeBigPhoto = function () {
+  // Обработчики закрытия полноэкранной фотографии
+  var onBigPhotoClose = function () {
     pictureElement.classList.add('hidden');
     bodyElement.classList.remove('modal-open');
     document.removeEventListener('keydown', onBigPhotoEscPress);
   };
 
   var onBigPhotoEscPress = function (evt) {
-    pressEsc(evt, closeBigPhoto);
+    pressEsc(evt, onBigPhotoClose);
   };
 
   window.photo = {
