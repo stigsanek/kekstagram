@@ -127,8 +127,21 @@
     lineProgressElement.style = 'width: ' + positionValue + '%';
 
     switch (currentEffect) {
+      case 'chrome':
+        previewElement.style = 'filter: grayscale(' + positionValue / 100 + ');';
+        break;
+      case 'sepia':
+        previewElement.style = 'filter: sepia(' + positionValue / 100 + ');';
+        break;
       case 'marvin':
-          previewElement.style = 'filter: invert(' + positionValue + '%);';
+        previewElement.style = 'filter: invert(' + positionValue + '%);';
+        break;
+      case 'phobos':
+        previewElement.style = 'filter: blur(' + positionValue * 3 / 100 + 'px);';
+        break;
+      case 'heat':
+        previewElement.style = 'filter: brightness(' + positionValue * 3 / 100 + ');';
+        break;
     };
   };
 
