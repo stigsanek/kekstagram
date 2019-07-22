@@ -12,6 +12,8 @@
 
   // Передаем модулую фотографий метод отрисовки и метод закрытия по Esc
   window.photo.initiate(window.page.render, window.util.pressEsc);
+   // Передаем модулую формы метод закрытия по Esc
+   window.form.initiate(window.util.pressEsc);
   // Передаем модулю фильтров метод удаления элементов со страницы
   window.filter.initiate(window.page.clear);
 
