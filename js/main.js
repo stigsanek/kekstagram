@@ -19,5 +19,9 @@
 
   document.addEventListener('DOMContentLoaded', function () {
     window.backend.download(enablePage);
+
+    window.slider.initiate(function () {
+      window.slider.getCoord();
+    });
   });
 })();
