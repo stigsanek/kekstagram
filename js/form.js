@@ -24,7 +24,9 @@
   // Обработчики закрытия формы редактирования изображения
   var onCloseFormElementClick = function() {
     formContainerElement.classList.add('hidden');
+    closeFormElement.removeEventListener('click', onCloseFormElementClick);
     document.removeEventListener('keydown', onFormElementEscPress);
+    disableForm();
   };
 
   var onFormElementEscPress = function (evt) {
@@ -51,6 +53,7 @@
       formContainerElement.classList.remove('hidden');
       closeFormElement.addEventListener('click', onCloseFormElementClick);
       document.addEventListener('keydown', onFormElementEscPress);
+      enableForm();
     }
   };
 
@@ -79,8 +82,17 @@
     }
   };
 
-  smallBtnElement.addEventListener('click', onSmallBtnElementClick);
-  bigBtnElement.addEventListener('click', onBigBtnElementClick);
+  // Функция перевода формы в активное состояние
+  var enableForm = function () {
+    smallBtnElement.addEventListener('click', onSmallBtnElementClick);
+    bigBtnElement.addEventListener('click', onBigBtnElementClick);
+  };
+
+  // Функция перевода формы в неактивное состояние
+  var disableForm = function () {
+    smallBtnElement.removeEventListener('click', onSmallBtnElementClick);
+    bigBtnElement.removeEventListener('click', onBigBtnElementClick);
+  };
 
   window.form = {
     initiate: setFormMethod
