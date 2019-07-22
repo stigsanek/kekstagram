@@ -8,6 +8,14 @@
     MIN: 25,
     MAX: 100
   };
+  var effectsClassListMap = {
+    'none': 'effects__preview--none',
+    'chrome': 'effects__preview--chrome',
+    'sepia': 'effects__preview--sepia',
+    'marvin': 'effects__preview--marvin',
+    'phobos': 'effects__preview--phobos',
+    'heat': 'effects__preview--heat'
+  };
 
   var formElement = document.querySelector('#upload-select-image');
   var formContainerElement = formElement.querySelector('.img-upload__overlay');
@@ -44,7 +52,6 @@
 
     if (matches) {
       var reader = new FileReader();
-
       reader.addEventListener('load', function () {
         previewElement.src = reader.result;
       });
@@ -82,16 +89,32 @@
     }
   };
 
+  // Обработчик наложения эффекта на изображение
+  var effectsListElement = formElement.querySelector('.img-upload__effects');
+  var effectLevelElement = formElement.querySelector('.img-upload__effect-level');
+
+  var onEffectsListElementClick = function (evt) {
+    previewElement.removeAttribute('class');
+    previewElement.setAttribute('class', effectsClassListMap[evt.target.value]);
+    if (previewElement.classList.contains('effects__preview--none')) {
+      effectLevelElement.classList.add('hidden');
+    } else {
+      effectLevelElement.classList.remove('hidden');
+    }
+  };
+
   // Функция перевода формы в активное состояние
   var enableForm = function () {
     smallBtnElement.addEventListener('click', onSmallBtnElementClick);
     bigBtnElement.addEventListener('click', onBigBtnElementClick);
+    effectsListElement.addEventListener('click', onEffectsListElementClick);
   };
 
   // Функция перевода формы в неактивное состояние
   var disableForm = function () {
     smallBtnElement.removeEventListener('click', onSmallBtnElementClick);
     bigBtnElement.removeEventListener('click', onBigBtnElementClick);
+    effectsListElement.removeEventListener('click', onEffectsListElementClick);
   };
 
   window.form = {
