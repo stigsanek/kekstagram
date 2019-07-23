@@ -23,6 +23,7 @@
   var fileChoserElement = formElement.querySelector('#upload-file');
   var previewElement = formElement.querySelector('.img-upload__preview').querySelector('img');
   var closeFormElement = formElement.querySelector('.img-upload__cancel');
+  var commentElement = formElement.querySelector('.text__description');
 
   // Получение метода закрытия формы по Esc
   var pressEsc = null;
@@ -43,7 +44,9 @@
   };
 
   var onFormElementEscPress = function (evt) {
-    pressEsc(evt, onCloseFormElementClick);
+    if (commentElement !== document.activeElement) {
+      pressEsc(evt, onCloseFormElementClick);
+    }
   };
 
   // Метод активации формы
