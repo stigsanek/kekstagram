@@ -109,6 +109,7 @@
     resetSlider();
     lineProgressElement.style = 'width: ' + WIDTH_LINE_SLIDER;
     previewElement.removeAttribute('class');
+    previewElement.removeAttribute('style');
     previewElement.setAttribute('class', effectsClassListMap[evt.target.value]);
     if (previewElement.classList.contains('effects__preview--none')) {
       effectLevelElement.classList.add('hidden');
@@ -148,6 +149,7 @@
   // Функция перевода формы в активное состояние
   var enableForm = function () {
     resetSlider();
+    effectLevelElement.classList.add('hidden');
     lineProgressElement.style = 'width: ' + WIDTH_LINE_SLIDER;
     smallBtnElement.addEventListener('click', onSmallBtnElementClick);
     bigBtnElement.addEventListener('click', onBigBtnElementClick);
@@ -160,6 +162,7 @@
     bigBtnElement.removeEventListener('click', onBigBtnElementClick);
     effectsListElement.removeEventListener('click', onEffectsListElementClick);
     removeSlider();
+    formElement.reset();
   };
 
   window.form = {

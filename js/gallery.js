@@ -5,7 +5,7 @@
   // Метод добавления элементов на страницу
   var photoListElement = document.querySelector('.pictures');
 
-  var pageListElements = [];
+  var galleryListElements = [];
 
   var insertElement = function (data, render) {
     var newNodeElement = null;
@@ -16,7 +16,7 @@
       data.forEach(function (element) {
         newNodeElement = render(element);
         fragmentElement.appendChild(newNodeElement);
-        pageListElements.push(newNodeElement);
+        galleryListElements.push(newNodeElement);
       });
       photoListElement.appendChild(fragmentElement);
     } else {
@@ -26,13 +26,13 @@
 
   // Метод удаления элементов со страницы
   var removeElement = function () {
-    pageListElements.forEach(function (item) {
+    galleryListElements.forEach(function (item) {
       item.remove();
     });
-    pageListElements = [];
+    galleryListElements = [];
   };
 
-  window.page = {
+  window.gallery = {
     render: insertElement,
     clear: removeElement
   };
