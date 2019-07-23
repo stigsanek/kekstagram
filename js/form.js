@@ -156,6 +156,36 @@
     }
   };
 
+  // Обработчик валидации поля хэш-тега
+  var inputHashtagsElement = formElement.querySelector('.text__hashtags');
+
+  var onInputHashtagsChange = function () {
+    var textValue = inputHashtagsElement.value.split(' ');
+
+    textValue.forEach(function (item) {
+      var element = item.toLowerCase();
+
+      for (var i = 1; i < element.length; i++) {
+        if (element[i] === '#') {
+          inputHashtagsElement.setCustomValidity('Хэш-теги должны разделяться пробелами');
+        }
+      }
+      if (element[0] !== '#') {
+        inputHashtagsElement.setCustomValidity('Хэш-теги должны начинаться с #');
+      }
+      if (element.length === 1) {
+        inputHashtagsElement.setCustomValidity('Хэш-тег не может состоять только из #');
+      }
+      if (element.length > 20) {
+        inputHashtagsElement.setCustomValidity('Максимальная длина хэш-тега 20 символов, включая #');
+      }
+    });
+
+    if (textValue.length > 5) {
+      inputHashtagsElement.setCustomValidity('Максимальное число хэш-тегов 5');
+    }
+  };
+
   // Функция перевода формы в активное состояние
   var enableForm = function () {
     resetSlider();
@@ -164,6 +194,7 @@
     smallBtnElement.addEventListener('click', onSmallBtnElementClick);
     bigBtnElement.addEventListener('click', onBigBtnElementClick);
     effectsListElement.addEventListener('click', onEffectsListElementClick);
+    inputHashtagsElement.addEventListener('change', onInputHashtagsChange);
   };
 
   // Функция перевода формы в неактивное состояние
@@ -171,6 +202,7 @@
     smallBtnElement.removeEventListener('click', onSmallBtnElementClick);
     bigBtnElement.removeEventListener('click', onBigBtnElementClick);
     effectsListElement.removeEventListener('click', onEffectsListElementClick);
+    inputHashtagsElement.removeEventListener('change', onInputHashtagsChange);
     removeSlider();
     formElement.reset();
   };
