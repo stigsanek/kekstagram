@@ -8,14 +8,6 @@
     MIN: 25,
     MAX: 100
   };
-  var effectsClassListMap = {
-    'none': 'effects__preview--none',
-    'chrome': 'effects__preview--chrome',
-    'sepia': 'effects__preview--sepia',
-    'marvin': 'effects__preview--marvin',
-    'phobos': 'effects__preview--phobos',
-    'heat': 'effects__preview--heat'
-  };
   var WIDTH_LINE_SLIDER = '100%';
 
   var formElement = document.querySelector('#upload-select-image');
@@ -113,7 +105,7 @@
     lineProgressElement.style = 'width: ' + WIDTH_LINE_SLIDER;
     previewElement.removeAttribute('class');
     previewElement.removeAttribute('style');
-    previewElement.setAttribute('class', effectsClassListMap[evt.target.value]);
+    previewElement.setAttribute('class', 'effects__preview--' + evt.target.value);
     if (previewElement.classList.contains('effects__preview--none')) {
       effectLevelElement.classList.add('hidden');
     } else {
