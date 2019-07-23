@@ -228,6 +228,9 @@
     inputHashTagsElement.removeEventListener('change', onHashTagsChange);
     inputHashTagsElement.removeEventListener('input', onHashTagsInput);
     removeSlider();
+    previewElement.src = 'img/upload-default-image.jpg';
+    previewElement.removeAttribute('style');
+    previewElement.setAttribute('class', 'effects__preview--none');
     formElement.reset();
   };
 
