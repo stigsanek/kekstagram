@@ -2,8 +2,10 @@
 
 // Модуль управления слайдером
 (function () {
-  var SLIDER_SIZE = 20;
-  var SLIDER_LINE = 100;
+  var Slider = {
+    SIZE: 20,
+    LINE: 100
+  };
   var DEFAULT_POSITION = 453;
 
   var sliderLineElement = document.querySelector('.effect-level__line');
@@ -30,9 +32,9 @@
         };
 
         var displacementX = sliderElement.offsetLeft - shift.x;
-        if (displacementX >= sliderLineElement.offsetLeft - SLIDER_SIZE && displacementX <= sliderLineElement.offsetLeft + sliderLineElement.offsetWidth - SLIDER_SIZE) {
+        if (displacementX >= sliderLineElement.offsetLeft - Slider.SIZE && displacementX <= sliderLineElement.offsetLeft + sliderLineElement.offsetWidth - Slider.SIZE) {
           sliderElement.style.left = displacementX + 'px';
-          callback(Math.floor(displacementX * SLIDER_LINE / sliderLineElement.offsetWidth));
+          callback(Math.floor(displacementX * Slider.LINE / sliderLineElement.offsetWidth));
         }
       };
 
