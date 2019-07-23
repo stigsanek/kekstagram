@@ -156,18 +156,31 @@
     }
   };
 
+  // Функция добавления outline
+  var addOutline = function () {
+    inputHashTagsElement.style = 'outline: 3px solid tomato';
+  };
+
+  // Обработчик удаления outline
+  var onHashTagsInput = function () {
+    inputHashTagsElement.removeAttribute('style');
+  };
+
   // Функция валидации поля хэш-тега
   var checkHashTags = function (data, item) {
     var messageError = '';
 
-    if (data[item].charAt(0) !== '#') {
+    if (data[item] === '') {
+      messageError = 'Хеш-теги должны разделяться пробелом. Удалите лишние пробелы.';
+
+    } else if (data[item].charAt(0) !== '#') {
       messageError = 'Хеш-теги должны начинаться с #';
 
     } else if (data[item].length === 1) {
       messageError = 'Хеш-теги должны состоять минимум из 1 символа, кроме #';
 
     } else if (data[item].indexOf('#', 1) > 0) {
-      messageError = 'Хеш-теги должны разделяться пробелами';
+      messageError = 'Хеш-теги должны разделяться пробелом';
 
     } else if (data.indexOf(data[item], item + 1) > 0) {
       messageError = 'Хеш-теги не должны повторяться';
@@ -182,17 +195,20 @@
   // Обработчик валидации поля хэш-тега
   var inputHashTagsElement = formElement.querySelector('.text__hashtags');
 
-  var onHashTagsInput = function () {
+  var onHashTagsChange = function () {
     var textValue = inputHashTagsElement.value.trim().split(' ');
     var messageError = '';
 
     if (textValue.length > 5) {
+      addOutline();
       messageError = 'Нельзя указать больше 5 хэш-тегов';
 
     } else {
       for (var i = 0; i < textValue.length; i++) {
         messageError = checkHashTags(textValue, i);
         if (messageError) {
+          addOutline();
+          inputHashTagsElement.addEventListener('input', onHashTagsInput);
           break;
         }
       }
@@ -209,7 +225,7 @@
     smallBtnElement.addEventListener('click', onSmallBtnElementClick);
     bigBtnElement.addEventListener('click', onBigBtnElementClick);
     effectsListElement.addEventListener('click', onEffectsListElementClick);
-    inputHashTagsElement.addEventListener('input', onHashTagsInput);
+    inputHashTagsElement.addEventListener('change', onHashTagsChange);
   };
 
   // Функция перевода формы в неактивное состояние
@@ -217,6 +233,7 @@
     smallBtnElement.removeEventListener('click', onSmallBtnElementClick);
     bigBtnElement.removeEventListener('click', onBigBtnElementClick);
     effectsListElement.removeEventListener('click', onEffectsListElementClick);
+    inputHashTagsElement.removeEventListener('change', onHashTagsChange);
     inputHashTagsElement.removeEventListener('input', onHashTagsInput);
     removeSlider();
     formElement.reset();
