@@ -127,21 +127,28 @@
     inputEffectElement.value = positionValue;
     lineProgressElement.style = 'width: ' + positionValue + '%';
 
+    var effectValue = null;
+
     switch (currentEffect) {
       case 'chrome':
-        previewElement.style = 'filter: grayscale(' + positionValue / 100 + ');';
+        effectValue = positionValue / 100;
+        previewElement.style = 'filter: grayscale(' + effectValue + ');';
         break;
       case 'sepia':
-        previewElement.style = 'filter: sepia(' + positionValue / 100 + ');';
+        effectValue = positionValue / 100;
+        previewElement.style = 'filter: sepia(' + effectValue + ');';
         break;
       case 'marvin':
-        previewElement.style = 'filter: invert(' + positionValue + '%);';
+        effectValue = positionValue;
+        previewElement.style = 'filter: invert(' + effectValue + '%);';
         break;
       case 'phobos':
-        previewElement.style = 'filter: blur(' + positionValue * 3 / 100 + 'px);';
+        effectValue = positionValue * 3 / 100;
+        previewElement.style = 'filter: blur(' + effectValue + 'px);';
         break;
       case 'heat':
-        previewElement.style = 'filter: brightness(' + positionValue * 3 / 100 + ');';
+        effectValue = 1 + positionValue * 2 / 100;
+        previewElement.style = 'filter: brightness(' + effectValue + ');';
         break;
     }
   };
