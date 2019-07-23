@@ -20,8 +20,10 @@
   document.addEventListener('DOMContentLoaded', function () {
     window.backend.download(enablePage);
 
+    // Активируем форму
     window.form.activate(function () {
       window.form.enable();
+      // Активируем слайдер
       window.slider.enable(window.form.applyEffect);
     });
   });
