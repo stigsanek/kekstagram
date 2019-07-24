@@ -48,6 +48,8 @@
   };
 
   // Обработчик загрузки изображения
+  var newPicture = null;
+
   var onFileChoserChange = function (callback) {
     return function () {
       var file = fileChoserElement.files[0];
@@ -61,6 +63,7 @@
         var reader = new FileReader();
         reader.addEventListener('load', function () {
           previewElement.src = reader.result;
+          newPicture = reader.result;
         });
 
         reader.readAsDataURL(file);
@@ -209,16 +212,29 @@
     inputHashTagsElement.setCustomValidity(messageError);
   };
 
+  // Функция создания объекта данных при отправке формы
+  var createData = function () {
+    var element = [{
+      'url': newPicture,
+      'likes': 0,
+      'comments': [],
+      'description': commentElement.value + ' ' + inputHashTagsElement.value
+    }];
+    return element;
+  };
+
   // Метод отправки данных формы
   var onFormSubmit = null;
 
-  var sendData = function (requestMethod, onSuccsess, onError) {
+  var sendData = function (requestMethod, onSuccsess, onError, insertMethod, renderMethod) {
     // Обработчик отправки формы
     onFormSubmit = function (evt) {
       evt.preventDefault();
+      var data = createData();
       requestMethod(new FormData(formElement), onSuccsess, onError);
       onCloseFormElementClick();
       disableForm();
+      insertMethod(data, renderMethod);
     };
     formElement.addEventListener('submit', onFormSubmit);
   };
