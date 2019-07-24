@@ -163,7 +163,7 @@
     var messageError = '';
 
     if (data[item] === '') {
-      messageError = 'Хеш-теги должны разделяться пробелом. Удалите лишние пробелы.';
+      messageError = 'Удалите лишние пробелы между хэш-тегами';
 
     } else if (data[item].charAt(0) !== '#') {
       messageError = 'Хеш-теги должны начинаться с #';
@@ -228,6 +228,7 @@
     inputHashTagsElement.removeEventListener('change', onHashTagsChange);
     inputHashTagsElement.removeEventListener('input', onHashTagsInput);
     removeSlider();
+    countScale = Scale.MAX;
     previewElement.src = 'img/upload-default-image.jpg';
     previewElement.removeAttribute('style');
     previewElement.setAttribute('class', 'effects__preview--none');
