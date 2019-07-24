@@ -17,9 +17,13 @@ var COMMENT_COUNT = 5;
 
   var createPhoto = function (data) {
     var newPhoto = templatePicureElement.cloneNode(true);
-    newPhoto.querySelector('.picture__img').src = data.url;
+    var newPhotoImgElement = newPhoto.querySelector('.picture__img');
+    newPhotoImgElement.src = data.url;
     newPhoto.querySelector('.picture__likes').textContent = data.likes;
     newPhoto.querySelector('.picture__comments').textContent = data.comments.length;
+    if (data.class) {
+      newPhotoImgElement.classList.add('effects__preview--' + data.class);
+    }
 
     // Обработчик клика
     var onPhotoClick = function () {
@@ -35,7 +39,7 @@ var COMMENT_COUNT = 5;
 
   // Функция создания полноэкранной фотографии
   var pictureElement = document.querySelector('.big-picture');
-  var phototElement = pictureElement.querySelector('.big-picture__img').querySelector('img');
+  var photoElement = pictureElement.querySelector('.big-picture__img').querySelector('img');
   var textElement = pictureElement.querySelector('.social__caption');
   var likeElement = pictureElement.querySelector('.likes-count');
   var commentListElement = pictureElement.querySelector('.social__comments');
@@ -46,10 +50,13 @@ var COMMENT_COUNT = 5;
   var commentLoaderElement = pictureElement.querySelector('.social__comments-loader');
 
   var createBigPhoto = function (data) {
-    phototElement.src = data.url;
+    photoElement.src = data.url;
     textElement.textContent = data.description;
     likeElement.textContent = data.likes;
     commentCountElement.textContent = data.comments.length;
+    if (data.class) {
+      photoElement.classList.add('effects__preview--' + data.class);
+    }
 
     createComment(data);
 

@@ -218,7 +218,8 @@
       'url': newPicture,
       'likes': 0,
       'comments': [],
-      'description': commentElement.value + ' ' + inputHashTagsElement.value
+      'description': commentElement.value + ' ' + inputHashTagsElement.value,
+      'class': currentEffect
     }];
     return element;
   };
