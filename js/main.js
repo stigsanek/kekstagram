@@ -16,6 +16,8 @@
   window.form.initiate(window.util.pressEsc, window.slider.remove, window.slider.reset);
   // Передаем модулю фильтров метод удаления элементов со страницы
   window.filter.initiate(window.gallery.clear);
+  // Передаем модулую сообщений метод закрытия по Esc
+  window.message.initiate(window.util.pressEsc);
 
   document.addEventListener('DOMContentLoaded', function () {
     window.backend.download(enablePage);
