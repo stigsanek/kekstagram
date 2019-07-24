@@ -83,7 +83,7 @@
     if (countScale > Scale.MIN) {
       countScale -= Scale.STEP;
       inputScaleElement.value = countScale + '%';
-      previewElement.style = 'transform: scale(' + countScale / Scale.MAX + ');';
+      previewElement.style.transform = 'scale(' + countScale / Scale.MAX + ')';
     }
   };
 
@@ -91,7 +91,7 @@
     if (countScale < Scale.MAX && countScale >= Scale.MIN) {
       countScale += Scale.STEP;
       inputScaleElement.value = countScale + '%';
-      previewElement.style = 'transform: scale(' + countScale / Scale.MAX + ');';
+      previewElement.style.transform = 'scale(' + countScale / Scale.MAX + ')';
     }
   };
 
@@ -102,9 +102,9 @@
 
   var onEffectsListElementClick = function (evt) {
     resetSlider();
-    lineProgressElement.style = 'width: ' + WIDTH_LINE_SLIDER;
+    lineProgressElement.style.width = WIDTH_LINE_SLIDER;
     previewElement.removeAttribute('class');
-    previewElement.removeAttribute('style');
+    previewElement.style.filter = null;
     previewElement.setAttribute('class', 'effects__preview--' + evt.target.value);
     if (previewElement.classList.contains('effects__preview--none')) {
       effectLevelElement.classList.add('hidden');
@@ -120,42 +120,42 @@
 
   var changeEffectLevel = function (positionValue) {
     inputEffectElement.value = positionValue;
-    lineProgressElement.style = 'width: ' + positionValue + '%';
+    lineProgressElement.style.width = positionValue + '%';
 
     var effectValue = null;
 
     switch (currentEffect) {
       case 'chrome':
         effectValue = positionValue / 100;
-        previewElement.style = 'filter: grayscale(' + effectValue + ');';
+        previewElement.style.filter = 'grayscale(' + effectValue + ')';
         break;
       case 'sepia':
         effectValue = positionValue / 100;
-        previewElement.style = 'filter: sepia(' + effectValue + ');';
+        previewElement.style.filter = 'sepia(' + effectValue + ')';
         break;
       case 'marvin':
         effectValue = positionValue;
-        previewElement.style = 'filter: invert(' + effectValue + '%);';
+        previewElement.style.filter = 'invert(' + effectValue + '%)';
         break;
       case 'phobos':
         effectValue = positionValue * 3 / 100;
-        previewElement.style = 'filter: blur(' + effectValue + 'px);';
+        previewElement.style.filter = 'blur(' + effectValue + 'px)';
         break;
       case 'heat':
         effectValue = 1 + positionValue * 2 / 100;
-        previewElement.style = 'filter: brightness(' + effectValue + ');';
+        previewElement.style.filter = 'brightness(' + effectValue + ')';
         break;
     }
   };
 
   // Функция добавления outline
   var addOutline = function () {
-    inputHashTagsElement.style = 'outline: 3px solid tomato';
+    inputHashTagsElement.style.outline = '3px solid tomato';
   };
 
   // Обработчик удаления outline
   var onHashTagsInput = function () {
-    inputHashTagsElement.removeAttribute('style');
+    inputHashTagsElement.style.outline = null;
   };
 
   // Функция валидации поля хэш-тега
@@ -213,7 +213,7 @@
   var enableForm = function () {
     resetSlider();
     effectLevelElement.classList.add('hidden');
-    lineProgressElement.style = 'width: ' + WIDTH_LINE_SLIDER;
+    lineProgressElement.style.width = WIDTH_LINE_SLIDER;
     smallBtnElement.addEventListener('click', onSmallBtnElementClick);
     bigBtnElement.addEventListener('click', onBigBtnElementClick);
     effectsListElement.addEventListener('click', onEffectsListElementClick);
@@ -222,16 +222,19 @@
 
   // Функция перевода формы в неактивное состояние
   var disableForm = function () {
+    // Удаляем обработчики
     smallBtnElement.removeEventListener('click', onSmallBtnElementClick);
     bigBtnElement.removeEventListener('click', onBigBtnElementClick);
     effectsListElement.removeEventListener('click', onEffectsListElementClick);
     inputHashTagsElement.removeEventListener('change', onHashTagsChange);
     inputHashTagsElement.removeEventListener('input', onHashTagsInput);
     removeSlider();
+    // Сбрасываем масштаб и стили для редактируемого изображения
     countScale = Scale.MAX;
     previewElement.src = 'img/upload-default-image.jpg';
     previewElement.removeAttribute('style');
     previewElement.setAttribute('class', 'effects__preview--none');
+    // Сбрасываем значения полей формы
     formElement.reset();
   };
 
