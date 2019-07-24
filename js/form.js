@@ -209,7 +209,21 @@
     inputHashTagsElement.setCustomValidity(messageError);
   };
 
-  // Функция перевода формы в активное состояние
+  // Метод отправки данных формы
+  var onFormSubmit = null;
+
+  var sendData = function (requestMethod, onSuccsess, onError) {
+    // Обработчик отправки формы
+    onFormSubmit = function (evt) {
+      evt.preventDefault();
+      requestMethod(new FormData(formElement), onSuccsess, onError);
+      onCloseFormElementClick();
+      disableForm();
+    };
+    formElement.addEventListener('submit', onFormSubmit);
+  };
+
+  // Метод перевода формы в активное состояние
   var enableForm = function () {
     resetSlider();
     effectLevelElement.classList.add('hidden');
@@ -222,12 +236,14 @@
 
   // Функция перевода формы в неактивное состояние
   var disableForm = function () {
-    // Удаляем обработчики
+    // Удаляем обработчики формы
     smallBtnElement.removeEventListener('click', onSmallBtnElementClick);
     bigBtnElement.removeEventListener('click', onBigBtnElementClick);
     effectsListElement.removeEventListener('click', onEffectsListElementClick);
     inputHashTagsElement.removeEventListener('change', onHashTagsChange);
     inputHashTagsElement.removeEventListener('input', onHashTagsInput);
+    formElement.removeEventListener('submit', onFormSubmit);
+    // Удаляем обработчик слайдера
     removeSlider();
     // Сбрасываем масштаб и стили для редактируемого изображения
     countScale = Scale.MAX;
@@ -242,6 +258,7 @@
     activate: activateForm,
     applyEffect: changeEffectLevel,
     enable: enableForm,
-    initiate: setFormMethod
+    initiate: setFormMethod,
+    send: sendData
   };
 })();

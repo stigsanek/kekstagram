@@ -27,6 +27,8 @@
       window.form.enable();
       // Активируем слайдер
       window.slider.enable(window.form.applyEffect);
+      // Активируем отправку формы
+      window.form.send(window.backend.upload, window.message.getSuccess, window.message.getError);
     });
   });
 })();
