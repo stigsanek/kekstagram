@@ -96,7 +96,7 @@
   };
 
   // Обработчик наложения эффекта на изображение
-  var effectsListElement = formElement.querySelector('.img-upload__effects');
+  var effectsInputElements = formElement.querySelectorAll('.effects__radio');
   var effectLevelElement = formElement.querySelector('.img-upload__effect-level');
   var currentEffect = null;
 
@@ -230,7 +230,9 @@
     lineProgressElement.style.width = WIDTH_LINE_SLIDER;
     smallBtnElement.addEventListener('click', onSmallBtnElementClick);
     bigBtnElement.addEventListener('click', onBigBtnElementClick);
-    effectsListElement.addEventListener('click', onEffectsListElementClick);
+    effectsInputElements.forEach(function (item) {
+      item.addEventListener('click', onEffectsListElementClick);
+    });
     inputHashTagsElement.addEventListener('change', onHashTagsChange);
   };
 
@@ -239,7 +241,9 @@
     // Удаляем обработчики формы
     smallBtnElement.removeEventListener('click', onSmallBtnElementClick);
     bigBtnElement.removeEventListener('click', onBigBtnElementClick);
-    effectsListElement.removeEventListener('click', onEffectsListElementClick);
+    effectsInputElements.forEach(function (item) {
+      item.removeEventListener('click', onEffectsListElementClick);
+    });
     inputHashTagsElement.removeEventListener('change', onHashTagsChange);
     inputHashTagsElement.removeEventListener('input', onHashTagsInput);
     formElement.removeEventListener('submit', onFormSubmit);
