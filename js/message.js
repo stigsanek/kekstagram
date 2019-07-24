@@ -2,7 +2,7 @@
 
 // Модуль создания сообщений для пользователя
 (function () {
-   var mainElement = document.querySelector('main');
+  var mainElement = document.querySelector('main');
 
   // Получение метода обработки события по ESC
   var pressEsc = null;
@@ -20,33 +20,33 @@
       mainElement.removeChild(element);
       document.removeEventListener('keydown', onBlockEscPress);
       element.removeEventListener('click', onBlockMessageClick);
-    }
+    };
 
     document.addEventListener('keydown', onBlockEscPress);
     element.addEventListener('click', onBlockMessageClick);
   };
 
-   // Метод создания сообщения об успешной отправке формы
-   var successTemplateElement = document.querySelector('#success').content.querySelector('.success');
+  // Метод создания сообщения об успешной отправке формы
+  var successTemplateElement = document.querySelector('#success').content.querySelector('.success');
 
-   var createSuccess = function () {
-     var newSuccessElement = successTemplateElement.cloneNode(true);
-     mainElement.appendChild(newSuccessElement);
-     openBlockMessage(newSuccessElement);
-   };
+  var createSuccess = function () {
+    var newSuccessElement = successTemplateElement.cloneNode(true);
+    mainElement.appendChild(newSuccessElement);
+    openBlockMessage(newSuccessElement);
+  };
 
-   // Метод создания сообщения об ошибке отправки формы
-   var errorTemplateElement = document.querySelector('#error').content.querySelector('.error');
+  // Метод создания сообщения об ошибке отправки формы
+  var errorTemplateElement = document.querySelector('#error').content.querySelector('.error');
 
-   var createError = function () {
-     var newErrorElement = errorTemplateElement.cloneNode(true);
-     mainElement.appendChild(newErrorElement);
-     openBlockMessage(newErrorElement);
-   };
+  var createError = function () {
+    var newErrorElement = errorTemplateElement.cloneNode(true);
+    mainElement.appendChild(newErrorElement);
+    openBlockMessage(newErrorElement);
+  };
 
-   window.message = {
+  window.message = {
     getSuccess: createSuccess,
     getError: createError,
     initiate: setUtil
-   };
+  };
 })();
