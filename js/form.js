@@ -223,15 +223,19 @@
 
   // Функция создания объекта данных при отправке формы
   var createData = function () {
-    var element = [{
-      'url': newPicture,
-      'likes': 0,
-      'comments': [],
-      'description': commentElement.value + ' ' + inputHashTagsElement.value,
-      'class': currentEffect,
-      'style': 'transform: ' + currentScale + '; ' + 'filter: ' + currentFilter + ';'
-    }];
-    return element;
+    var data = [];
+
+    var element = new Object();
+    element.url = newPicture;
+    element.likes = 0;
+    element.comments = [];
+    element.description = commentElement.value + ' ' + inputHashTagsElement.value;
+    element.class = currentEffect;
+    element.style = 'transform: ' + currentScale + '; filter: ' + currentFilter + ';';
+
+    data.push(element);
+
+    return data;
   };
 
   // Метод отправки данных формы
@@ -243,9 +247,9 @@
       evt.preventDefault();
       var data = createData();
       requestMethod(new FormData(formElement), onSuccsess, onError);
+      insertMethod(data, renderMethod);
       onCloseFormElementClick();
       disableForm();
-      insertMethod(data, renderMethod);
     };
     formElement.addEventListener('submit', onFormSubmit);
   };
@@ -281,6 +285,9 @@
     previewElement.src = 'img/upload-default-image.jpg';
     previewElement.removeAttribute('style');
     previewElement.setAttribute('class', 'effects__preview--none');
+    currentEffect = null;
+    currentScale = null;
+    currentFilter = null;
     // Сбрасываем значения полей формы
     formElement.reset();
   };

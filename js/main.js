@@ -27,7 +27,7 @@
       window.form.enable();
       // Активируем слайдер
       window.slider.enable(window.form.applyEffect);
-      // Активируем отправку формы
+      // Активируем отправку формы и добавление загруженного изображения в галлерею
       window.form.send(window.backend.upload, window.message.getSuccess, window.message.getError, window.gallery.render, window.photo.create);
     });
   });
