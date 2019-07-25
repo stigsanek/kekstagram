@@ -200,7 +200,7 @@
   var inputHashTagsElement = formElement.querySelector('.text__hashtags');
 
   var onHashTagsChange = function () {
-    var textValue = inputHashTagsElement.value.trim().split(' ');
+    var textValue = inputHashTagsElement.value.toLowerCase().trim().split(' ');
     var messageError = '';
 
     if (textValue.length > 5) {
