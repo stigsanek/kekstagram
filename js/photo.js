@@ -100,6 +100,7 @@ var COMMENT_COUNT = 5;
         commentContainerElement.innerHTML = data.comments.length + ' из <span class="comments-count">' + data.comments.length + '</span> комментариев';
         listComments = [];
         commentLoaderElement.classList.add('hidden');
+        commentLoaderElement.removeEventListener('click', onCommentLoaderClick);
       } else {
         for (var i = 0; i < COMMENT_COUNT; i++) {
           fragmentElement.appendChild(listComments[i]);
@@ -121,16 +122,20 @@ var COMMENT_COUNT = 5;
       }
     };
 
-    renderComment();
-    commentLoaderElement.addEventListener('click', function () {
+    // Обработчик загрузки комментариев по нажатию кнопки
+    var onCommentLoaderClick = function () {
       renderComment();
-    });
+    };
+
+    renderComment();
+    commentLoaderElement.addEventListener('click', onCommentLoaderClick);
   };
 
   // Обработчики закрытия полноэкранной фотографии
   var onCloseElementClick = function () {
     pictureElement.classList.add('hidden');
     bodyElement.classList.remove('modal-open');
+    closeElement.removeEventListener('click', onCloseElementClick);
     document.removeEventListener('keydown', onBigPhotoEscPress);
   };
 

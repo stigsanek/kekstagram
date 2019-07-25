@@ -62,6 +62,7 @@
       if (matches) {
         var reader = new FileReader();
 
+        // Обработчик загрузки файла
         var onReaderLoad = function () {
           previewElement.src = reader.result;
           newPicture = reader.result;
