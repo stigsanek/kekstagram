@@ -38,8 +38,10 @@
   // Метод создания сообщения об ошибке отправки формы
   var errorTemplateElement = document.querySelector('#error').content.querySelector('.error');
 
-  var createError = function () {
+  var createError = function (message) {
     var newErrorElement = errorTemplateElement.cloneNode(true);
+    var errorTextElement = newErrorElement.querySelector('.error__title');
+    errorTextElement.textContent = message;
     mainElement.appendChild(newErrorElement);
     openBlockMessage(newErrorElement);
   };
