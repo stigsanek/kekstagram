@@ -230,8 +230,8 @@
     element.likes = 0;
     element.comments = [];
     element.description = commentElement.value + ' ' + inputHashTagsElement.value;
-    element.class = currentEffect;
-    element.style = 'transform: ' + currentScale + '; filter: ' + currentFilter + ';';
+    element.effect = currentEffect;
+    element.effectValue = 'transform: ' + currentScale + '; filter: ' + currentFilter + ';';
 
     data.push(element);
 

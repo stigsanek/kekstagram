@@ -21,11 +21,11 @@ var COMMENT_COUNT = 5;
     newPhotoImgElement.src = data.url;
     newPhoto.querySelector('.picture__likes').textContent = data.likes;
     newPhoto.querySelector('.picture__comments').textContent = data.comments.length;
-    if (data.class) {
-      newPhotoImgElement.classList.add('effects__preview--' + data.class);
+    if (data.effect) {
+      newPhotoImgElement.classList.add('effects__preview--' + data.effect);
     }
-    if (data.style) {
-      newPhotoImgElement.style = data.style;
+    if (data.effectValue) {
+      newPhotoImgElement.style = data.effectValue;
     }
 
     // Обработчик клика
@@ -57,11 +57,11 @@ var COMMENT_COUNT = 5;
     textElement.textContent = data.description;
     likeElement.textContent = data.likes;
     commentCountElement.textContent = data.comments.length;
-    if (data.class) {
-      photoElement.classList.add('effects__preview--' + data.class);
+    if (data.effect) {
+      photoElement.classList.add('effects__preview--' + data.effect);
     }
-    if (data.style) {
-      photoElement.style = data.style;
+    if (data.effectValue) {
+      photoElement.style = data.effectValue;
     }
 
     createComment(data);
