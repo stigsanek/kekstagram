@@ -61,10 +61,14 @@
 
       if (matches) {
         var reader = new FileReader();
-        reader.addEventListener('load', function () {
+
+        var onReaderLoad = function () {
           previewElement.src = reader.result;
           newPicture = reader.result;
-        });
+          reader.removeEventListener('load', onReaderLoad);
+        };
+
+        reader.addEventListener('load', onReaderLoad);
 
         reader.readAsDataURL(file);
         formContainerElement.classList.remove('hidden');
