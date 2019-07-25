@@ -86,14 +86,12 @@
   var bigBtnElement = formElement.querySelector('.scale__control--bigger');
 
   var countScale = parseInt(inputScaleElement.value, 10);
-  var currentScale = null;
 
   var onSmallBtnElementClick = function () {
     if (countScale > Scale.MIN) {
       countScale -= Scale.STEP;
       inputScaleElement.value = countScale + '%';
       previewElement.style.transform = 'scale(' + countScale / Scale.MAX + ')';
-      currentScale = 'scale(' + countScale / Scale.MAX + ')';
     }
   };
 
@@ -102,7 +100,6 @@
       countScale += Scale.STEP;
       inputScaleElement.value = countScale + '%';
       previewElement.style.transform = 'scale(' + countScale / Scale.MAX + ')';
-      currentScale = 'scale(' + countScale / Scale.MAX + ')';
     }
   };
 
@@ -128,7 +125,6 @@
   // Метод применения эффекта при перемещении слайдера
   var inputEffectElement = formElement.querySelector('.effect-level__value');
   var lineProgressElement = formElement.querySelector('.effect-level__depth');
-  var currentFilter = null;
 
   var changeEffectLevel = function (positionValue) {
     inputEffectElement.value = positionValue;
@@ -140,27 +136,22 @@
       case 'chrome':
         effectValue = positionValue / 100;
         previewElement.style.filter = 'grayscale(' + effectValue + ')';
-        currentFilter = 'grayscale(' + effectValue + ')';
         break;
       case 'sepia':
         effectValue = positionValue / 100;
         previewElement.style.filter = 'sepia(' + effectValue + ')';
-        currentFilter = 'sepia(' + effectValue + ')';
         break;
       case 'marvin':
         effectValue = positionValue;
         previewElement.style.filter = 'invert(' + effectValue + '%)';
-        currentFilter = 'invert(' + effectValue + '%)';
         break;
       case 'phobos':
         effectValue = positionValue * 3 / 100;
         previewElement.style.filter = 'blur(' + effectValue + 'px)';
-        currentFilter = 'blur(' + effectValue + 'px)';
         break;
       case 'heat':
         effectValue = 1 + positionValue * 2 / 100;
         previewElement.style.filter = 'brightness(' + effectValue + ')';
-        currentFilter = 'brightness(' + effectValue + ')';
         break;
     }
   };
@@ -236,7 +227,7 @@
     element.comments = [];
     element.description = commentElement.value + ' ' + inputHashTagsElement.value;
     element.effect = currentEffect;
-    element.effectValue = 'transform: ' + currentScale + '; filter: ' + currentFilter + ';';
+    element.effectValue = previewElement.getAttribute('style');
 
     data.push(element);
 
@@ -291,8 +282,6 @@
     previewElement.removeAttribute('style');
     previewElement.setAttribute('class', 'effects__preview--none');
     currentEffect = null;
-    currentScale = null;
-    currentFilter = null;
     // Сбрасываем значения полей формы
     formElement.reset();
   };
