@@ -24,6 +24,9 @@ var COMMENT_COUNT = 5;
     if (data.class) {
       newPhotoImgElement.classList.add('effects__preview--' + data.class);
     }
+    if (data.style) {
+      newPhotoImgElement.style = data.style;
+    }
 
     // Обработчик клика
     var onPhotoClick = function () {
@@ -56,6 +59,9 @@ var COMMENT_COUNT = 5;
     commentCountElement.textContent = data.comments.length;
     if (data.class) {
       photoElement.classList.add('effects__preview--' + data.class);
+    }
+    if (data.style) {
+      photoElement.style = data.style;
     }
 
     createComment(data);
