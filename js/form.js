@@ -221,7 +221,7 @@
   var createData = function () {
     var data = [];
 
-    var element = new Object();
+    var element = {};
     element.url = newPicture;
     element.likes = 0;
     element.comments = [];
