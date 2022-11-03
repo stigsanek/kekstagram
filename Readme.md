@@ -1,11 +1,12 @@
-# Проект «Кекстаграм» от [HTML Academy](https://htmlacademy.ru/)
+# Учебный проект «Кекстаграм»
 
-* Вёрстка: [HTML Academy](https://htmlacademy.ru/)
-* JS: [Александр Егоров](https://github.com/stigsanek)
+* Студент: [Александр Егоров](https://up.htmlacademy.ru/javascript/17/user/646269).
 
 ---
 
 _Не удаляйте и не обращайте внимание на файлы:_<br>
-_`.editorconfig`, `.gitignore`, `package-lock.json`, `package.json`._
+_`.editorconfig`, `.eslintrc`, `.gitattributes`, `.gitignore`, `.travis.yml`, `package-lock.json`, `package.json`._
 
 ---
+
+Репозиторий создан для обучения на интенсивном онлайн‑курсе «[Профессиональный JavaScript](https://htmlacademy.ru/intensive/javascript)», уровень 1 от [HTML Academy](https://htmlacademy.ru).
